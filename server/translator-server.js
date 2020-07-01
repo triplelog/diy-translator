@@ -143,9 +143,9 @@ function frenchGuess(input){
 
 function sentenceError(guess,references) {
 	var minwer = 10;
-	var guessArr = guess.replace('.','').toLowerCase().split(' ');
+	var guessArr = guess.replace(/\./g,'').replace(/\?/g,'').toLowerCase().split(' ');
 	for (var i=0;i<references.length;i++){
-		var ref = references[i].replace('.','').toLowerCase().split(' ');
+		var ref = references[i].replace(/\./g,'').replace(/\?/g,'').toLowerCase().split(' ');
 		var wer = lev(guessArr,ref)/ref.length;
 		if (wer < minwer){minwer = wer;}
 	}
