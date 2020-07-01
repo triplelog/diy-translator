@@ -22,9 +22,13 @@ const UserData = require('./models/userdata');
 var express = require('express');
 
 
-var fromLogin = require('./login-server.js');
-var app = fromLogin.loginApp;
-var tempKeys = fromLogin.tempKeys;
+//var fromLogin = require('./login-server.js');
+
+
+var app = express();
+
+//var app = fromLogin.loginApp;
+//var tempKeys = fromLogin.tempKeys;
 
 
 console.log(performance.now());
