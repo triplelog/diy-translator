@@ -37,18 +37,37 @@ var sentences = JSON.parse(rawSentences);
 var eng_keys = Object.keys(sentences['etof']);
 console.log(performance.now());
 
+var rawRules = fs.readFileSync('../rules/words.json', 'utf8');
+var rules = JSON.parse(rawRules);
+
 app.use('/',express.static('static'));
 
 app.get('/', 
 	
 	function(req, res) {
-		var key = eng_keys[Math.floor(Math.random()*1000)];
-		var fkey = sentences['etof'][key]['links'][0];
-		var english1 = sentences['etof'][key]['text'];
-		var french1 = sentences['ftoe'][fkey]['text'];
+		var english1;
+		var french1;
+		var guess1;
+		var gtime = 0;
+		for (var k=0;k<1000;k++){
+			var key = eng_keys[k];
+			var fkey = sentences['etof'][key]['links'][0];
+			english1 = sentences['etof'][key]['text'];
+			french1 = sentences['ftoe'][fkey]['text'];
+			var stime = performance.now();
+			guess1 = frenchGuess(english1);
+			gtime += performance.now() - stime;
+			if (guess1 != '???'){
+				break;
+			}
+		}
+		console.log(gtime, k);
+		
+		
 		res.write(nunjucks.render('templates/index.html',{
 			english1: english1,
 			french1: french1,
+			guess1: guess1,
 		}));
 		res.end();
 	}
@@ -101,3 +120,25 @@ wss.on('connection', function connection(ws) {
 });
 
 
+function frenchGuess(input){
+	var s = input.split(' ');
+	var foundWord = false;
+	var output = '';
+	for (var i=0;i<s.length;i++){
+		var word = s[i].replace('.','');
+		if (rules[word]){
+			output += rules[word];
+			foundWord = true;
+		}
+		else {
+			output += '?';
+		}
+		if (i<s.length-1){output += ' ';}
+	}
+	if (foundWord){
+		return guess;
+	}
+	else {
+		return '???';
+	}
+}
