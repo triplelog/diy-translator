@@ -136,7 +136,7 @@ function frenchGuess(input){
 		if (i<s.length-1){output += ' ';}
 	}
 	if (foundWord){
-		return guess;
+		return output;
 	}
 	else {
 		return '???';
