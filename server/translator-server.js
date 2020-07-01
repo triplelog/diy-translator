@@ -60,7 +60,7 @@ app.get('/',
 		var gtime = 0;
 		var klist = [];
 		var avgerr = 0;
-		for (var k=0;k<100;k++){
+		for (var k=0;k<10000;k++){
 			var key = eng_keys[k];
 			var fkey = sentences['etof'][key]['links'][0];
 			english1 = sentences['etof'][key]['text'];
@@ -73,7 +73,6 @@ app.get('/',
 				klist.push(k);
 			}
 			avgerr += sErr;
-			console.log(avgerr);
 		}
 		console.log(gtime, k, avgerr);
 		var k = klist[Math.floor(Math.random()*klist.length)];
@@ -180,14 +179,8 @@ function sentenceError(guess,references) {
 	var guessArr = guess.replace(/\./g,'').replace(/\?/g,'').toLowerCase().split(' ');
 	for (var i=0;i<references.length;i++){
 		var ref = references[i].replace(/\./g,'').replace(/\?/g,'').toLowerCase().split(' ');
-		var wer = lev(guessArr,ref)/ref.length;
+		var wer = lev(guessArr,ref)/Math.max(guessArr.length,ref.length);
 		if (wer < minwer){minwer = wer;}
-		if (wer > 1){
-			console.log(guess,references[i]);
-			console.log(guessArr,ref);
-			console.log(lev(guessArr,ref),ref.length);
-			console.log(soto);
-		}
 	}
 	return minwer;
 }
