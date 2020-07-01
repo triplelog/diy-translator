@@ -220,7 +220,15 @@ Guess: {{ guess1 }}
 {% block content13 %}
 <div>English Word:<input type="text" id="word"></input></div>
 <div>French Word:<input type="text" id="french"></input></div>
-<div>POS:<select id="pos"><option value="adj">Adjective</option><option value="noun">Noun</option></select></div>
+<div>POS:<select id="pos">
+		<option value="adj">Adjective</option>
+		<option value="noun">Noun</option>
+		<option value="verb">Verb</option>
+		<option value="adv">Adverb</option>
+		<option value="pro">Pronoun</option>
+		
+	</select>
+</div>
 <div><button class="basic" onclick="addWord()">Submit</button></div>
 {% endblock %}	
 
