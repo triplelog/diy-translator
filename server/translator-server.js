@@ -144,7 +144,7 @@ wss.on('connection', function connection(ws) {
 			else {
 				rules.words[dm.word] = [dm.info];
 			}
-			console.log(rules.words);
+			//console.log(rules.words);
 			fs.writeFile('../rules/words.json', JSON.stringify(rules.words), function(err, fileData) {
 			});
 			return;
