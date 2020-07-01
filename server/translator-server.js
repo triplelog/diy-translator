@@ -38,7 +38,16 @@ var eng_keys = Object.keys(sentences['etof']);
 console.log(performance.now());
 
 var rawRules = fs.readFileSync('../rules/words.json', 'utf8');
-var rules = JSON.parse(rawRules);
+var savedName = 'wordsSaved';
+var da = new Date();
+savedName += da.getMonth();
+savedName += '-';
+savedName += da.getDate();
+savedName += '-';
+savedName += da.getYear();
+fs.writeFile('../rules/'+savedName+'.json', rawRules, function(err, fileData) {
+});
+var rules = {"words":JSON.parse(rawRules)};
 
 app.use('/',express.static('static'));
 
@@ -117,19 +126,30 @@ wss.on('connection', function connection(ws) {
 			}
 			return;
 		}
+		
+		if (dm.type && dm.type == 'word'){
+			if (rules.words[dm.word]){
+				rules.words[dm.word].push(dm.info);
+			}
+			else {
+				rules.words[dm.word] = [dm.info];
+			}
+			console.log(rules.words);
+			fs.writeFile('../rules/words.json', JSON.stringify(rules.words), function(err, fileData) {
+			});
+			return;
+		}
   	});
 });
 
 
 function frenchGuess(input){
 	var s = input.split(' ');
-	var foundWord = false;
 	var output = '';
 	for (var i=0;i<s.length;i++){
 		var word = s[i].replace(/\./g,'').replace(/\?/g,'');
-		if (rules[word]){
-			output += rules[word][0]['text'];
-			foundWord = true;
+		if (rules.words[word]){
+			output += rules.words[word][0]['text'];
 		}
 		else {
 			output += '?';

@@ -210,15 +210,17 @@ Guess: {{ guess1 }}
 		
 	</span>
 	<span class="titleCenter">
-		<a href="https://gifsaw.com">Gifsaw</a>
+		Words
 	</span>
 	<span class="titleRight">
 	</span>
 </div>
 {% endblock %}
 {% block content13 %}
-Create jigsaw puzzles from any image or gif with <a href="https://gifsaw.com">Gifsaw</a>. 
-Complete them yourself, collaboratively, or competitively. You can even design your own scoring system to challenge your friends or the world.
+English Word:<input type="text" id="word"></input>
+French Word:<input type="text" id="french"></input>
+POS:<select id="pos"><option value="adj">Adjective</option><option value="noun">Noun</option></select>
+<button class="basic" onclick="addWord()">Submit</button>
 {% endblock %}	
 
 {% block title31 %}
@@ -297,6 +299,22 @@ Experiment with images and color using <a href="https://qblur.com">QbluR</a>. Ea
 
 
 {% block scripts %}
+<script>
+var ws = new WebSocket('wss://gifsaw.com:8080');
+ws.onopen = function(evt) {
 
+}
+ws.onmessage = function(evt){
+	
+}
+function addWord() {
+	var word = document.getElementById('word').value;
+	var text = document.getElementById('french').value;
+	var pos = document.getElementById('pos').value;
+	var jsonmessage ={'type':'word','word':word,'info':{"text":text,"pos":pos}};
+	console.log(jsonmessage);
+	ws.send(JSON.stringify(jsonmessage));
+}
+</script>
 {% endblock %}
 
