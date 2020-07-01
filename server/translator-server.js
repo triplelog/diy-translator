@@ -42,8 +42,9 @@ app.use('/',express.static('static'));
 app.get('/', 
 	
 	function(req, res) {
-		var fkey = sentences['etof'][eng_keys[0]]['links'][0];
-		var english1 = sentences['etof'][eng_keys[0]]['text'];
+		var key = eng_keys[Math.floor(Math.random()*1000)];
+		var fkey = sentences['etof'][key]['links'][0];
+		var english1 = sentences['etof'][key]['text'];
 		var french1 = sentences['ftoe'][fkey]['text'];
 		res.write(nunjucks.render('templates/index.html',{
 			english1: english1,
