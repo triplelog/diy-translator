@@ -57,11 +57,8 @@ app.get('/',
 			var stime = performance.now();
 			guess1 = frenchGuess(english1);
 			gtime += performance.now() - stime;
-			if (guess1 != '???'){
-				if (sentenceError(guess1,[french1])< .9){
-					break;
-				}
-				
+			if (sentenceError(guess1,[french1])< 1){
+				break;
 			}
 		}
 		console.log(gtime, k);
@@ -138,12 +135,9 @@ function frenchGuess(input){
 		}
 		if (i<s.length-1){output += ' ';}
 	}
-	if (foundWord){
-		return output;
-	}
-	else {
-		return '???';
-	}
+
+	return output;
+
 }
 
 function sentenceError(guess,references) {
