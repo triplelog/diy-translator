@@ -182,6 +182,12 @@ function sentenceError(guess,references) {
 		var ref = references[i].replace(/\./g,'').replace(/\?/g,'').toLowerCase().split(' ');
 		var wer = lev(guessArr,ref)/ref.length;
 		if (wer < minwer){minwer = wer;}
+		if (wer > 1){
+			console.log(guess,references[i]);
+			console.log(guessArr,ref);
+			console.log(lev(guessArr,ref),ref.length);
+			console.log(soto);
+		}
 	}
 	return minwer;
 }
