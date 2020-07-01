@@ -1,0 +1,301 @@
+{% extends "templates/base.html" %}
+
+{% block meta %}
+    <meta name="description" content=".">    <title>TripleLog</title>  
+    <link rel="icon" type="image/png" href="../tlfavicon.png">
+{% endblock %}
+    
+{% block borderRadius %}
+	--border-radius: 1.25rem;
+{% endblock %}
+
+{% block content22CSS %}
+	/*border: 1px solid black;*/
+{% endblock %}
+	
+
+
+{% block titleCSS %}
+
+.title:hover .titleBG {
+  	background-position: 350px 0px;
+  	transition: all 2s linear;
+}
+.titleBG {
+  	background-position: -50px 0px;
+  	transition: all 2s linear;
+}
+.content-11 .title {
+	background-image: url("../img/farmbg2-40.png");
+  	background-size: 100% 100%;
+  	background-repeat: no-repeat;
+}
+.content-11 .titleBG {
+	background-image: url("../img/ftractor-40.png");
+  	background-size: auto 100%;
+  	background-repeat: no-repeat;
+  	width: 100%;
+  	height: 100%;
+}
+.content-13 .title {
+	background: rgb(228,242,228);
+	background-image: url("../img/gifsawheader.png");
+	background-size: auto 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.content-31 .title {
+	background-image: url("../qblurheaderrotate.png");
+	background-size: 100% 100%;
+}
+.content-33 .title {
+	background: rgb(228,242,228);
+	background-image: url("../chheadertrans.png");
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	background-position-x: 50%;
+}
+
+.content {
+	text-align: center;
+}
+
+div:Not(.content-22) > .content {
+	overflow-y: auto;
+	overflow-x: auto;
+	overflow: auto;
+	padding: calc(.75 * var(--border-radius));
+	font-size: 1.1rem;
+}
+div:Not(.content-22) > .title a{
+	font-size: 1.75rem;
+}
+
+.logoText {
+	width:10rem;
+	left:-1rem;
+	position:relative;
+	top:2rem;
+	display: inline-block;
+	 height: 4rem; 
+	 line-height: 4rem; 
+	 color: white;
+	 font-size: 2.5rem; 
+	 text-align: center;
+	 text-shadow: 0px 0px 5px black, 0px 0px 10px rgb(64,64,64), 0px 0px 20px gray;
+	 font-family: Tahoma, Geneva, sans-serif;
+	 letter-spacing: 2px;
+}
+.logoDiv {
+	height: 8rem;
+}
+.logoDiv img {
+	width:10rem;
+	top:-1.5rem;
+	left: -.5rem;
+	position: absolute;
+}
+.logoText {
+	width:14rem;
+	left:-2.5rem;
+	top:1.5rem;
+	font-size:3rem;
+}
+.centerLink button.basic {
+	font-size:1rem;
+	padding: .3rem .5rem;
+}
+
+@media screen and (max-width: 959px) {
+	.logoDiv img {
+		width:8rem;
+		top: -1rem;
+		left:-.5rem;
+	}
+	.logoText {
+		width:14rem;
+		left:-3.5rem;
+		top:1rem;
+		font-size:2.5rem;
+	}
+	.title {
+		font-size: 1.2rem;
+	}
+}
+@media screen and (max-width: 719px) {
+
+	.logoDiv {
+		margin:auto;
+	}
+	.logoDiv {
+		height: 8rem;
+		width: 12rem;
+		
+	}
+	div.logoDiv img {
+		width:7.5rem;
+		left:2.5rem;
+		position: absolute;
+	}
+	span.logoText {
+		width:12rem;
+		left:0rem;
+		position: relative;
+		top:2rem;
+	}
+	.title {
+		font-size: 1rem;
+	}
+	div:Not(.content-22) > .content {
+		font-size: 1rem;
+	}
+	div.container .titleRight i {
+		top: 0rem;
+	}
+	.centerLinks {
+		display: none;
+		
+	}
+	.content-22 .content {
+		text-align: center;
+	}
+}
+@media screen and (max-width: 599px) {
+	
+	
+	
+	.title {
+		font-size: 1rem;
+	}
+	div:Not(.content-22) > .content {
+		font-size: 1rem;
+	}
+	
+	
+}
+{% endblock %}
+
+
+{% block moreCSS %}
+
+{% endblock %}
+
+
+{% block title11 %}
+<div class="title">
+	<div class="titleBG">
+	</div>
+	<span class="titleLeft">
+	
+	</span>
+	<span class="titleCenter">
+		
+	</span>
+	<span class="titleRight">
+	</span>
+	
+</div>
+{% endblock %}
+{% block content11 %}
+English: {{ english1 }}<br />
+French: {{ french1 }}
+{% endblock %}	
+
+{% block title13 %}
+<div class="title">
+	<div class="titleBG">
+	</div>
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		<a href="https://gifsaw.com">Gifsaw</a>
+	</span>
+	<span class="titleRight">
+	</span>
+</div>
+{% endblock %}
+{% block content13 %}
+Create jigsaw puzzles from any image or gif with <a href="https://gifsaw.com">Gifsaw</a>. 
+Complete them yourself, collaboratively, or competitively. You can even design your own scoring system to challenge your friends or the world.
+{% endblock %}	
+
+{% block title31 %}
+<div class="title">
+	<div class="titleBG">
+	</div>
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		<a href="https://qblur.com">QbluR</a>
+	</span>
+	<span class="titleRight">
+	</span>
+</div>
+{% endblock %}
+{% block content31 %}
+Experiment with images and color using <a href="https://qblur.com">QbluR</a>. Easily create customizable <a href="https://qblur.com/gradient">gradients</a>, <a href="https://qblur.com/filter">filters</a>, and <a href="https://qblur.com/overlay">overlays</a>.
+{% endblock %}
+
+{% block title33 %}
+<div class="title">
+	<div class="titleBG">
+	</div>
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		<a href="https://csshole.com">CSShole</a>
+	</span>
+	<span class="titleRight">
+	</span>
+</div>
+{% endblock %}
+{% block content33 %}
+<a href="https://csshole.com">CSShole</a> is a showcase for interactive content generated with just HTML and CSS. Play <a href="https://csshole.com/sudoku.html">Sudoku</a>, view baseball <a href="https://csshole.com/sortable.html">stats</a>, or test your knowledge of <a href="https://csshole.com/mathquiz.html">trigonometry</a>.
+{% endblock %}
+
+
+{% block content22 %}
+	<div class="logoDiv">
+		<img src="../tripleloglogo.png">
+		<span class="logoText">TripleLog</span>	
+	</div>
+	<!--<div class="centerLink">
+		<button class="basic" onclick="window.location.href='../account';">My Account</button>
+	</div>-->
+	<div class="centerLinks">
+		<div class="centerLink">
+			<button class="basic" onclick="window.location.href='../about';">About</button>
+		</div>
+		<div class="centerLink">
+			<button class="basic" onclick="window.location.href='../privay';">Privacy Policy</button>
+		</div>
+		<div class="centerLink">
+			<button class="basic" onclick="window.location.href='../terms';">Terms</button>
+		</div>
+	</div>
+
+
+{% endblock %}
+
+{% block footer %}
+	<button class="basic" onclick="window.location.href='../about';">About</button>
+	<button class="basic" onclick="window.location.href='../privay';">Privacy Policy</button>
+	<button class="basic" onclick="window.location.href='../terms';">Terms</button>
+
+{% endblock %}
+
+
+
+
+{% block bodyStart %}
+
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}
+

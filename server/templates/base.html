@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+    {% block meta %}
+    <meta name="description" content=".">    <title>CSShole</title>  
+    <link rel="icon" type="image/png" href="../chfaviconcrop.png">
+    {% endblock %}
+    
+
+<link rel="stylesheet" href="../icons/fontawesome/css/all.css">
+<link rel="stylesheet" href="https://martianmath.com/css/onebase.css">
+{% block stylesheets %}
+{% endblock %}
+
+
+<style>
+div.container {
+	{% block borderRadius %}
+	{% endblock %}
+}
+
+
+
+{% block titleCSS %}
+{% endblock %}
+
+
+{% block moreCSS %}
+{% endblock %}
+
+
+
+</style>
+
+</head>
+<body>
+
+{% block bodyStart %}
+{% endblock %}
+<div class="container">
+	
+
+	<input type="radio" style="display: none;" name="radio11" value="1" id="radio11-1"></input>
+	<input type="radio" style="display: none;" name="radio11" value="2" id="radio11-2"></input>
+	<input type="radio" style="display: none;" name="radio11" value="3" id="radio11-3"></input>
+	<div class="content-11">
+		{% block title11 %}
+		{% endblock %}
+		<div class="content">
+			{% block content11 %}
+			{% endblock %}
+		</div>
+	</div>
+	
+	<input type="radio" style="display: none;" name="radio13" value="1" id="radio13-1"></input>
+	<input type="radio" style="display: none;" name="radio13" value="2" id="radio13-2"></input>
+	<input type="radio" style="display: none;" name="radio13" value="3" id="radio13-3"></input>
+	<div class="content-13">
+		{% block title13 %}
+		{% endblock %}
+		<div class="content">
+			{% block content13 %}
+			{% endblock %}
+		</div>
+	</div>
+	
+	<input type="radio" style="display: none;" name="radio31" value="1" id="radio31-1"></input>
+	<input type="radio" style="display: none;" name="radio31" value="2" id="radio31-2"></input>
+	<input type="radio" style="display: none;" name="radio31" value="3" id="radio31-3"></input>
+	<div class="content-31">
+		{% block title31 %}
+		{% endblock %}
+		<div class="content">
+			{% block content31 %}
+			{% endblock %}
+		</div>
+
+	</div>
+	
+	<input type="radio" style="display: none;" name="radio33" value="1" id="radio33-1"></input>
+	<input type="radio" style="display: none;" name="radio33" value="2" id="radio33-2"></input>
+	<input type="radio" style="display: none;" name="radio33" value="3" id="radio33-3"></input>
+	<div class="content-33">
+		{% block title33 %}
+		{% endblock %}
+		<div class="content">
+			{% block content33 %}
+			{% endblock %}
+		</div>
+	</div>
+	
+	<div class="content-12">
+		{% block title12 %}
+		{% endblock %}
+		<div class="content">
+			{% block content12 %}
+			{% endblock %}
+		</div>
+	</div>
+	<div class="content-21">
+		{% block title21 %}
+		{% endblock %}
+		<div class="content">
+			{% block content21 %}
+			{% endblock %}
+		</div>
+	</div>
+	<div class="content-23">
+		<div class="content">
+			
+		</div>
+	</div>
+	<div class="content-32">
+		<div class="content">
+			
+		</div>
+	</div>
+	<div class="content-00">
+		{% block content00 %}
+		{% endblock %}
+	</div>
+	<div class="content-22">
+		<div class="content">
+			{% block content22 %}
+			{% endblock %}
+		</div>
+	</div>
+	
+</div>
+<div id="footer">
+	{% block footer %}
+	{% endblock %}
+</div>
+{% block scripts %}
+{% endblock %}
+
+</body>
+</html>
