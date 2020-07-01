@@ -164,7 +164,7 @@ function frenchGuess(input){
 			output += rules.words[word][0]['text'];
 		}
 		else {
-			output += '?';
+			output += '_';
 		}
 		if (i<s.length-1){output += ' ';}
 	}
