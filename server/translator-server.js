@@ -125,7 +125,7 @@ function frenchGuess(input){
 	var foundWord = false;
 	var output = '';
 	for (var i=0;i<s.length;i++){
-		var word = s[i].replace('.','');
+		var word = s[i].replace(/\./g,'').replace(/\?/g,'');
 		if (rules[word]){
 			output += rules[word][0]['text'];
 			foundWord = true;
