@@ -58,6 +58,7 @@ app.get('/',
 			guess1 = frenchGuess(english1);
 			gtime += performance.now() - stime;
 			if (sentenceError(guess1,[french1])< .95){
+				console.log(sentenceError(guess1,[french1]));
 				break;
 			}
 		}
