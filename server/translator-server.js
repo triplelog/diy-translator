@@ -72,8 +72,6 @@ app.get('/',
 			}
 		}
 		console.log(gtime, k);
-		console.log(klist.length);
-		console.log(klist.slice(0,5));
 		var k = klist[Math.floor(Math.random()*klist.length)];
 		var key = eng_keys[k];
 		var fkey = sentences['etof'][key]['links'][0];
