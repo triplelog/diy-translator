@@ -60,7 +60,7 @@ app.get('/',
 		var gtime = 0;
 		var klist = [];
 		var avgerr = 0;
-		for (var k=0;k<10000;k++){
+		for (var k=0;k<100;k++){
 			var key = eng_keys[k];
 			var fkey = sentences['etof'][key]['links'][0];
 			english1 = sentences['etof'][key]['text'];
@@ -73,6 +73,7 @@ app.get('/',
 				klist.push(k);
 			}
 			avgerr += sErr;
+			console.log(avgerr);
 		}
 		console.log(gtime, k, avgerr);
 		var k = klist[Math.floor(Math.random()*klist.length)];
