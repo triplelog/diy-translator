@@ -189,7 +189,7 @@ div:Not(.content-22) > .title a{
 	
 	</span>
 	<span class="titleCenter">
-		
+		{{ acc1 }}
 	</span>
 	<span class="titleRight">
 	</span>
@@ -200,6 +200,7 @@ div:Not(.content-22) > .title a{
 English: {{ english1 }}<br />
 French: {{ french1 }}<br />
 Guess: {{ guess1 }}
+
 {% endblock %}	
 
 {% block title13 %}
@@ -217,10 +218,10 @@ Guess: {{ guess1 }}
 </div>
 {% endblock %}
 {% block content13 %}
-English Word:<input type="text" id="word"></input>
-French Word:<input type="text" id="french"></input>
-POS:<select id="pos"><option value="adj">Adjective</option><option value="noun">Noun</option></select>
-<button class="basic" onclick="addWord()">Submit</button>
+<div>English Word:<input type="text" id="word"></input></div>
+<div>French Word:<input type="text" id="french"></input></div>
+<div>POS:<select id="pos"><option value="adj">Adjective</option><option value="noun">Noun</option></select></div>
+<div><button class="basic" onclick="addWord()">Submit</button></div>
 {% endblock %}	
 
 {% block title31 %}
