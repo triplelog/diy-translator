@@ -15,9 +15,10 @@ const { PerformanceObserver, performance } = require('perf_hooks');
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/triplelog', {useNewUrlParser: true});
+/*
 const User = require('./models/user');
 const UserData = require('./models/userdata');
-
+*/
 var express = require('express');
 
 
