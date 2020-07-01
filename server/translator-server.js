@@ -58,7 +58,10 @@ app.get('/',
 			guess1 = frenchGuess(english1);
 			gtime += performance.now() - stime;
 			if (guess1 != '???'){
-				break;
+				if (sentenceError(guess1,[french1])< .9){
+					break;
+				}
+				
 			}
 		}
 		console.log(gtime, k);
@@ -142,3 +145,48 @@ function frenchGuess(input){
 		return '???';
 	}
 }
+
+function sentenceError(guess,references) {
+	var minwer = 10;
+	var guessArr = guess.replace('.','').toLowerCase().split(' ');
+	for (var i=0;i<references.length;i++){
+		var ref = references[i].replace('.','').toLowerCase().split(' ');
+		var wer = lev(guessArr,ref)/ref.length;
+		if (wer < minwer){minwer = wer;}
+	}
+	return minwer;
+}
+
+function lev(a, b){
+  if(a.length == 0) return b.length; 
+  if(b.length == 0) return a.length; 
+
+  var matrix = [];
+
+  // increment along the first column of each row
+  var i;
+  for(i = 0; i <= b.length; i++){
+    matrix[i] = [i];
+  }
+
+  // increment each column in the first row
+  var j;
+  for(j = 0; j <= a.length; j++){
+    matrix[0][j] = j;
+  }
+
+  // Fill in the rest of the matrix
+  for(i = 1; i <= b.length; i++){
+    for(j = 1; j <= a.length; j++){
+      if(b[i-1] == a[j-1]){
+        matrix[i][j] = matrix[i-1][j-1];
+      } else {
+        matrix[i][j] = Math.min(matrix[i-1][j-1] + 1, // substitution
+                                Math.min(matrix[i][j-1] + 1, // insertion
+                                         matrix[i-1][j] + 1)); // deletion
+      }
+    }
+  }
+
+  return matrix[b.length][a.length];
+};
