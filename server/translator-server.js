@@ -67,13 +67,16 @@ app.get('/',
 			var stime = performance.now();
 			guess1 = frenchGuess(english1);
 			gtime += performance.now() - stime;
-			if (sentenceError(guess1,[french1])< 1 && sentenceError(guess1,[french1]) > 0){
+			if (sentenceError(guess1,[french1])< .96 && sentenceError(guess1,[french1]) > .05){
 				klist.push(k);
 			}
 		}
 		console.log(gtime, k);
+		console.log(klist.length);
+		console.log(klist.slice(0,5));
 		var k = klist[Math.floor(Math.random()*klist.length)];
 		var key = eng_keys[k];
+		var fkey = sentences['etof'][key]['links'][0];
 		english1 = sentences['etof'][key]['text'];
 		french1 = sentences['ftoe'][fkey]['text'];
 		var stime = performance.now();
