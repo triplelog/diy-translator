@@ -202,7 +202,7 @@ French: {{ french1 }}<br />
 Guess: <span id="guess">{{ guess1 }}</span>
 <div>
 	{% for rule in rules %}
-		<div>{{ rule | safe | dump }}</div>
+		<div>{{ rule | safe }}</div>
 	{% endfor %}
 </div>
 {% endblock %}	
