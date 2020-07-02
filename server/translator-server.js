@@ -185,7 +185,9 @@ function frenchGuess(input){
 		var word = s[i].replace(/\./g,'').replace(/\?/g,'');
 		if (rules.words[word]){
 			output += rules.words[word][0]['text'];
-			rulesUsed.push(rules.words[word]);
+			var rw = {};
+			rw[word]= rules.words[word];
+			rulesUsed.push(JSON.stringify(rw));
 		}
 		else {
 			output += '_';
