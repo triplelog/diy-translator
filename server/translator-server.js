@@ -190,7 +190,7 @@ function frenchGuess(input){
 			output += rules.words[word][0]['text'];
 			var rw = {};
 			rw[word]= rules.words[word];
-			rulesUsed.push(JSON.stringify(rw));
+			rulesUsed.push(JSON.stringify(rw.val));
 		}
 		else {
 			output += '_';
