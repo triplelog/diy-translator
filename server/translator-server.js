@@ -47,8 +47,8 @@ savedName += '-';
 savedName += da.getYear();
 fs.writeFile('../rules/'+savedName+'.json', rawRules, function(err, fileData) {
 });
-var rules = {"words":JSON.parse(rawRules)};
-
+var rules = {"words":JSON.parse(rawRules),"phrases":{}};
+var rulesUsed = [];
 app.use('/',express.static('static'));
 
 app.get('/', 
@@ -91,6 +91,7 @@ app.get('/',
 			french1: french1,
 			guess1: guess1,
 			acc1: acc1,
+			rules: rulesUsed,
 		}));
 		res.end();
 	}
@@ -150,6 +151,26 @@ wss.on('connection', function connection(ws) {
 			//console.log(rules.words);
 			fs.writeFile('../rules/words.json', JSON.stringify(rules.words), function(err, fileData) {
 			});
+			var guess = frenchGuess(dm.english1);
+			var acc = sentenceError(guess,[dm.french1]);
+			var jsonmessage = {"type":"guess","guess":guess,"acc":acc};
+			ws.send(JSON.stringify(jsonmessage));
+			return;
+		}
+		if (dm.type && dm.type == 'phrase'){
+			if (rules.phrases[dm.phrase]){
+				rules.phrases[dm.phrase].push(dm.info);
+			}
+			else {
+				rules.phrases[dm.phrase] = [dm.info];
+			}
+			//console.log(rules.words);
+			fs.writeFile('../rules/phrases.json', JSON.stringify(rules.phrases), function(err, fileData) {
+			});
+			var guess = frenchGuess(dm.english1);
+			var acc = sentenceError(guess,[dm.french1]);
+			var jsonmessage = {"type":"guess","guess":guess,"acc":acc};
+			ws.send(JSON.stringify(jsonmessage));
 			return;
 		}
   	});
@@ -159,10 +180,12 @@ wss.on('connection', function connection(ws) {
 function frenchGuess(input){
 	var s = input.split(' ');
 	var output = '';
+	rulesUsed = [];
 	for (var i=0;i<s.length;i++){
 		var word = s[i].replace(/\./g,'').replace(/\?/g,'');
 		if (rules.words[word]){
 			output += rules.words[word][0]['text'];
+			rulesUsed.push(rules.words[word]);
 		}
 		else {
 			output += '_';

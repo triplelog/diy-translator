@@ -188,7 +188,7 @@ div:Not(.content-22) > .title a{
 	<span class="titleLeft">
 	
 	</span>
-	<span class="titleCenter">
+	<span class="titleCenter" id="acc">
 		{{ acc1 }}
 	</span>
 	<span class="titleRight">
@@ -199,8 +199,12 @@ div:Not(.content-22) > .title a{
 {% block content11 %}
 English: {{ english1 }}<br />
 French: {{ french1 }}<br />
-Guess: {{ guess1 }}
-
+Guess: <span id="guess">{{ guess1 }}</span>
+<div>
+	{% for rule in rules %}
+		<div>{{ rule | safe | dump }}</div>
+	{% endfor %}
+</div>
 {% endblock %}	
 
 {% block title13 %}
@@ -233,6 +237,13 @@ Guess: {{ guess1 }}
 		
 	</select>
 </div>
+<div>Gender:<select id="gender">
+		<option value="none">None</option>
+		<option value="female">Female</option>
+		<option value="male">Male</option>
+		
+	</select>
+</div>
 <div><button class="basic" onclick="addWord()">Submit</button></div>
 {% endblock %}	
 
@@ -244,14 +255,17 @@ Guess: {{ guess1 }}
 		
 	</span>
 	<span class="titleCenter">
-		<a href="https://qblur.com">QbluR</a>
+		Phrases
 	</span>
 	<span class="titleRight">
 	</span>
 </div>
 {% endblock %}
 {% block content31 %}
-Experiment with images and color using <a href="https://qblur.com">QbluR</a>. Easily create customizable <a href="https://qblur.com/gradient">gradients</a>, <a href="https://qblur.com/filter">filters</a>, and <a href="https://qblur.com/overlay">overlays</a>.
+<div>English Phrase:<input type="text" id="phrase"></input></div>
+<div>French Phrase:<input type="text" id="frenchPhrase"></input></div>
+
+<div><button class="basic" onclick="addPhrase()">Submit</button></div>
 {% endblock %}
 
 {% block title33 %}
@@ -318,13 +332,26 @@ ws.onopen = function(evt) {
 
 }
 ws.onmessage = function(evt){
-	
+	var dm = JSON.parse(evt.data);
+	if (dm.type == "guess"){
+		document.getElementById("guess").textContent = dm.guess;
+		document.getElementById("acc").textContent = dm.acc;
+	}
 }
+var english1 = "{{ english1 }}";
+var french1 = "{{ french1 }}";
 function addWord() {
 	var word = document.getElementById('word').value;
 	var text = document.getElementById('french').value;
 	var pos = document.getElementById('pos').value;
-	var jsonmessage ={'type':'word','word':word,'info':{"text":text,"pos":pos}};
+	var jsonmessage ={'type':'word','word':word,'info':{"text":text,"pos":pos,"gen":gender},"english1":english1,"french1":french1};
+	console.log(jsonmessage);
+	ws.send(JSON.stringify(jsonmessage));
+}
+function addPhrase() {
+	var phrase = document.getElementById('phrase').value;
+	var text = document.getElementById('frenchPhrase').value;
+	var jsonmessage ={'type':'phrase','phrase':phrase,'info':{"text":text},"english1":english1,"french1":french1};
 	console.log(jsonmessage);
 	ws.send(JSON.stringify(jsonmessage));
 }
