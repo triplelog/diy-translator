@@ -38,6 +38,7 @@ var eng_keys = Object.keys(sentences['etof']);
 console.log(performance.now());
 
 var rawRules = fs.readFileSync('../rules/words.json', 'utf8');
+var rawPhrases = fs.readFileSync('../rules/phrases.json', 'utf8');
 var savedName = 'wordsSaved';
 var da = new Date();
 savedName += da.getMonth();
@@ -47,7 +48,9 @@ savedName += '-';
 savedName += da.getYear();
 fs.writeFile('../rules/'+savedName+'.json', rawRules, function(err, fileData) {
 });
-var rules = {"words":JSON.parse(rawRules),"phrases":{}};
+fs.writeFile('../rules/'+savedName.replace('words','phrases')+'.json', rawPhrases, function(err, fileData) {
+});
+var rules = {"words":JSON.parse(rawRules),"phrases":JSON.parse(rawPhrases)};
 var rulesUsed = [];
 app.use('/',express.static('static'));
 
