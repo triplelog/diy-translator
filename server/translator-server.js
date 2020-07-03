@@ -201,7 +201,6 @@ function frenchGuess(input){
 	for (var i=0;i<s.length - 1;i++){
 		var word = s[i];
 		if (rules.phrases[word]){
-			console.log(rules.phrases[word]);
 			var foundMatch = false;
 			for (var ii=0;ii<rules.phrases[word].length;ii++){
 				var phraseParts = rules.phrases[word][ii].phrase.split(' ');
@@ -211,7 +210,7 @@ function frenchGuess(input){
 						break;
 					}
 					if (phraseParts[iii] == "{x}"){
-						x = s[iii+i];
+						x = output[iii+i];
 					}
 					if (iii == phraseParts.length-1){
 						foundMatch = true;
@@ -222,12 +221,7 @@ function frenchGuess(input){
 						output[i+iii] = '_';
 					}
 					
-					if (rules.words[x]){
-						output[i] = rules.phrases[word][ii].text.replace("{x}",rules.words[x]);
-					}
-					else {
-						output[i] = rules.phrases[word][ii].text.replace("{x}","_");
-					}
+					output[i] = rules.phrases[word][ii].text.replace("{x}",x);
 					var rw = {};
 					rw[word]= rules.words[word];
 					rulesUsed.push(JSON.stringify(rw));

@@ -345,6 +345,7 @@ function addWord() {
 	var word = document.getElementById('word').value;
 	var text = document.getElementById('french').value;
 	var pos = document.getElementById('pos').value;
+	var gender = document.getElementById('gender').value;
 	var condition = document.getElementById('condition').value;
 	var jsonmessage ={'type':'word','word':word,'info':{"text":text,"pos":pos,"gen":gender,"condition":condition},"english1":english1,"french1":french1};
 	console.log(jsonmessage);
