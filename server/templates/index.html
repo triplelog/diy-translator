@@ -244,6 +244,7 @@ Guess: <span id="guess">{{ guess1 }}</span>
 		
 	</select>
 </div>
+<div>Condition:<input type="text" id="condition"></input></div>
 <div><button class="basic" onclick="addWord()">Submit</button></div>
 {% endblock %}	
 
@@ -264,7 +265,7 @@ Guess: <span id="guess">{{ guess1 }}</span>
 {% block content31 %}
 <div>English Phrase:<input type="text" id="phrase"></input></div>
 <div>French Phrase:<input type="text" id="frenchPhrase"></input></div>
-
+<div>Condition:<input type="text" id="conditionPhrase"></input></div>
 <div><button class="basic" onclick="addPhrase()">Submit</button></div>
 {% endblock %}
 
@@ -344,14 +345,16 @@ function addWord() {
 	var word = document.getElementById('word').value;
 	var text = document.getElementById('french').value;
 	var pos = document.getElementById('pos').value;
-	var jsonmessage ={'type':'word','word':word,'info':{"text":text,"pos":pos,"gen":gender},"english1":english1,"french1":french1};
+	var condition = document.getElementById('condition').value;
+	var jsonmessage ={'type':'word','word':word,'info':{"text":text,"pos":pos,"gen":gender,"condition":condition},"english1":english1,"french1":french1};
 	console.log(jsonmessage);
 	ws.send(JSON.stringify(jsonmessage));
 }
 function addPhrase() {
 	var phrase = document.getElementById('phrase').value;
 	var text = document.getElementById('frenchPhrase').value;
-	var jsonmessage ={'type':'phrase','phrase':phrase,'info':{"text":text},"english1":english1,"french1":french1};
+	var condition = document.getElementById('conditionPhrase').value;
+	var jsonmessage ={'type':'phrase','phrase':phrase,'info':{"text":text,"condition":condition},"english1":english1,"french1":french1};
 	console.log(jsonmessage);
 	ws.send(JSON.stringify(jsonmessage));
 }

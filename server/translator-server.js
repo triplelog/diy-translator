@@ -161,11 +161,13 @@ wss.on('connection', function connection(ws) {
 			return;
 		}
 		if (dm.type && dm.type == 'phrase'){
-			if (rules.phrases[dm.phrase]){
-				rules.phrases[dm.phrase].push(dm.info);
+			var firstWord = dm.phrase.toLowerCase().split(' ')[0];
+			dm.info['phrase'] = dm.phrase.toLowerCase();
+			if (rules.phrases[firstWord]){
+				rules.phrases[firstWord].push(dm.info);
 			}
 			else {
-				rules.phrases[dm.phrase] = [dm.info];
+				rules.phrases[firstWord] = [dm.info];
 			}
 			//console.log(rules.words);
 			fs.writeFile('../rules/phrases.json', JSON.stringify(rules.phrases), function(err, fileData) {
@@ -181,24 +183,63 @@ wss.on('connection', function connection(ws) {
 
 
 function frenchGuess(input){
-	var s = input.split(' ');
-	var output = '';
+	var s = input.replace(/\./g,'').replace(/\?/g,'').toLowerCase().split(' ');
+	var output = [];
 	rulesUsed = [];
 	for (var i=0;i<s.length;i++){
-		var word = s[i].replace(/\./g,'').replace(/\?/g,'');
+		var word = s[i];
 		if (rules.words[word]){
-			output += rules.words[word][0]['text'];
+			output.push(rules.words[word][0]['text']);
 			var rw = {};
 			rw[word]= rules.words[word];
 			rulesUsed.push(JSON.stringify(rw));
 		}
 		else {
-			output += '_';
+			output.push('_');
 		}
-		if (i<s.length-1){output += ' ';}
 	}
+	for (var i=0;i<s.length - 1;i++){
+		var word = s[i];
+		if (rules.phrases[word]){
+			var foundMatch = false;
+			for (var ii=0;ii<rules.phrases[word].length;ii++){
+				var phraseParts = rules.phrases[word][ii].phrase.split(' ');
+				var x = "_";
+				for (var iii=0;iii<phraseParts.length;iii++){
+					if (phraseParts[iii]!=s[iii+i] && phraseParts[iii] != "{x}"){
+						break;
+					}
+					if (phraseParts[iii] == "{x}"){
+						x = s[iii+i];
+					}
+					if (iii == phraseParts.length-1){
+						foundMatch = true;
+					}
+				}
+				if (foundMatch){
+					for (var iii=0;iii<phraseParts.length;iii++){
+						output[i+iii] = '_';
+					}
+					
+					if (rules.words[x]){
+						output[i] = rules.phrases[word][ii].text.replace("{x}",rules.words[x]);
+					}
+					else {
+						output[i] = rules.phrases[word][ii].text.replace("{x}","_");
+					}
+					var rw = {};
+					rw[word]= rules.words[word];
+					rulesUsed.push(JSON.stringify(rw));
+					break;
+				}
+			}
+			
+		}
+		
+	}
+	
 
-	return output;
+	return output.join(' ');
 
 }
 
