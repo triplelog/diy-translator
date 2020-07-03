@@ -201,6 +201,7 @@ function frenchGuess(input){
 	for (var i=0;i<s.length - 1;i++){
 		var word = s[i];
 		if (rules.phrases[word]){
+			console.log(rules.phrases[word]);
 			var foundMatch = false;
 			for (var ii=0;ii<rules.phrases[word].length;ii++){
 				var phraseParts = rules.phrases[word][ii].phrase.split(' ');
